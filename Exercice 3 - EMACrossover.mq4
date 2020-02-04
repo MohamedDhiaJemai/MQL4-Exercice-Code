@@ -12,6 +12,7 @@
 //+------------------------------------------------------------------+
 int OnInit()
   {
+	double priceCrossover=0;
 //---
    
 //---
@@ -32,28 +33,21 @@ void OnTick()
   {
    
    double slowMA = iMA(NULL,0,5,0,MODE_EMA,PRICE_CLOSE,0);
-   double lastSlowMA = iMA(NULL,0,5,0,MODE_EMA,PRICE_CLOSE,1);
+   //double lastSlowMA = iMA(NULL,0,5,0,MODE_EMA,PRICE_CLOSE,1);
    
    double fastMA = iMA(NULL,0,3,0,MODE_EMA,PRICE_CLOSE,0);
-   double lastFastMA = iMA(NULL,0,3,0,MODE_EMA,PRICE_CLOSE,1);
+   //double lastFastMA = iMA(NULL,0,3,0,MODE_EMA,PRICE_CLOSE,1);
    
    float x =(float)slowMA;
    float y =(float)fastMA;
-   float z =x-y;
-
-   double priceCrossover=0;
    
    if(z==y){
       priceCrossover=x;
    }   
-/*   else{
-      Comment ("x : ",x,"  |  y : ",y,"  |  Difference : ",z );
-   }*/
-   
    
    while(priceCrossover>0)
    {
-      Comment("Croissement a : ", priceCrossover);
+      Comment("Moving Average 1 : ",x,"  |  Moving Average 2 : ",y,"  |  Difference : ",(x-y),"  |  Croissement à : ", priceCrossover);
       ObjectCreate(_Symbol,"Croisement",OBJ_HLINE,0,0,x);  
       ObjectSetInteger(0,"Croisement",OBJPROP_COLOR,clrRed);
       ObjectSetInteger(0,"Croisement",OBJPROP_WIDTH,3);
